@@ -9,7 +9,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"Change\\Composer": "src/"
+			"\\Change\\Composer\\": "src/"
 		}
 	},
 	"extra": {
