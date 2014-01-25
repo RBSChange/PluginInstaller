@@ -20,7 +20,6 @@ class PluginInstaller extends LibraryInstaller
 	 */
 	public function getPackageBasePath(PackageInterface $package)
 	{
-		$prefix = substr($package->getPrettyName(), 0, 23);
 		$parts = explode('/', $package->getPrettyName());
 		if (count($parts) != "2")
 		{
@@ -33,12 +32,22 @@ class PluginInstaller extends LibraryInstaller
 
 		if ($package->getType() === "rbschange-module")
 		{
-			return implode(DIRECTORY_SEPARATOR, ['Plugin' , 'Modules', $vendor, $name]);
+			return implode(DIRECTORY_SEPARATOR, ['Plugins' , 'Modules', $vendor, $name]);
 		}
 
 		if ($package->getType() === "rbschange-theme")
 		{
-			return implode(DIRECTORY_SEPARATOR, ['Plugin' , 'Themes', $vendor, $name]);
+			return implode(DIRECTORY_SEPARATOR, ['Plugins' , 'Themes', $vendor, $name]);
+		}
+
+		if ($package->getType() === "rbschange-core")
+		{
+			return 'Change';
+		}
+
+		if ($package->getType() === "rbschange-tests")
+		{
+			return 'ChangeTests';
 		}
 
 		throw new \RuntimeException('Package can not be installed');
@@ -49,6 +58,6 @@ class PluginInstaller extends LibraryInstaller
 	 */
 	public function supports($packageType)
 	{
-		return in_array($packageType, ['rbschange-module', 'rbschange-theme']);
+		return in_array($packageType, ['rbschange-module', 'rbschange-theme', "rbschange-tests", "rbschange-core"]);
 	}
 } 
